@@ -7,7 +7,7 @@ html = URI.open(url_top).read # open file and convert it into a string with the 
 
 doc = Nokogiri::HTML(html) # convert the html file string into a Nokogiri document
 
-# 1. Get to5 5 movies by scraping
+# 1. Get the top 5 movies by scraping
 # nokogiri scraping
 top_movies = []
 
@@ -19,17 +19,16 @@ top_movies = []
                   } 
 end
 
-# 2. got to show page of each movie and extract rest of info
+# 2. go to show page of each movie and extract rest of info
 top_movies.each do |item| # iterate over the top movies array
     puts item[:title]
-
+    
     show_url_base = "https://www.imdb.com/#{item[:link]}" # get the link and create a new url for scraping the show page for each movie
 
     html_show = URI.open(show_url_base).read # open and store html file into a string
 
     doc_show = Nokogiri::HTML(html_show) # create a Nokogiri document out of html string
 
-    
     p "Director: #{doc_show.search(".ipc-metadata-list__item:contains('Director') a")[0].text}" # Nokogiri search to find director
     # we use the containes method to look for the element that containes the text passed to the method
 
@@ -41,9 +40,7 @@ top_movies.each do |item| # iterate over the top movies array
 
     p "========================================================"
 end
-# ipc-metadata-list-item__list-content-item--link
 
-# open-uri open websites and get html
 
 
 
